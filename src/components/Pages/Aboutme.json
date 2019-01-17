@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "Hi!",
+    "text": "I am a web designer / developer. I am from a town called 'Cat-Man-Do' [Kathmandu]. Nowadays I am based in London, UK. Desiging is my passion. I enjoying designing and developing websites."
+  },
+  {
+    "id": 2,
+    "title":"I can Design the way you like",
+    "text" : "My goal would be focusing on content, suitable font-type, colour combination, Images and conveying the message that you would like to send. I prefer a clean design. This is just my personal preference. I believe on design is a personal matter. I will design the way you like."
+  },
+  {
+    "id": 3,
+    "title": "I can develop what you need",
+    "text" : "I am a developer. I can develop a website that meets your requirement. I use current trends and technology. That fits in all type of devices."
+  },
+  {
+    "id": 4,
+    "title": "Status",
+    "text": "I am currently available for freelance work. If you have a project that you want to get started. Please get in touch."
+  }
+]

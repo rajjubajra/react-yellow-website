@@ -1,25 +1,60 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { render } from 'react-dom'
+import { Router, Route, Link } from 'react-router'
+
+import './components/Css/Font.css';
+import FullPagNav from './components/Pages/FullPageNav';
+import Landing from './components/Pages/Landing';
+import Aboutme from './components/Pages/Aboutme';
+import Footer from './components/Pages/Footer';
+import Test from './components/Pages/Test';
+
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      route: 'home'
+    }
+  }
+
+  routeChangeTo = (route) => {
+    console.log('clicked', route);
+    this.setState({route: route});
+  }
+
+  pageRoute = (nav) => {
+    switch(nav){
+      case 'home':
+        return <Landing />
+      break;
+
+      case 'nav':
+        return <FullPagNav />
+      break;
+
+      case 'about':
+        return <Aboutme />
+      break;
+
+    }
+
+  }
+
+
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Landing />
+        <Aboutme />
+        <Footer  />
+
+        {/* <div><button onClick={() => this.routeChangeTo('nav')}>Nav</button></div>
+
+        {this.pageRoute(this.state.route)}
+        
+         <Footer  routeChangeTo={this.routeChangeTo} /> */}
       </div>
     );
   }
