@@ -1,13 +1,13 @@
 {
   "main.css": "/react-yellow-website/static/css/main.a0ecb492.chunk.css",
-  "main.js": "/react-yellow-website/static/js/main.166b0647.chunk.js",
-  "main.js.map": "/react-yellow-website/static/js/main.166b0647.chunk.js.map",
+  "main.js": "/react-yellow-website/static/js/main.caf54326.chunk.js",
+  "main.js.map": "/react-yellow-website/static/js/main.caf54326.chunk.js.map",
   "runtime~main.js": "/react-yellow-website/static/js/runtime~main.a5bd91e7.js",
   "runtime~main.js.map": "/react-yellow-website/static/js/runtime~main.a5bd91e7.js.map",
-  "static/js/2.652366c0.chunk.js": "/react-yellow-website/static/js/2.652366c0.chunk.js",
-  "static/js/2.652366c0.chunk.js.map": "/react-yellow-website/static/js/2.652366c0.chunk.js.map",
+  "static/js/2.6a089a0b.chunk.js": "/react-yellow-website/static/js/2.6a089a0b.chunk.js",
+  "static/js/2.6a089a0b.chunk.js.map": "/react-yellow-website/static/js/2.6a089a0b.chunk.js.map",
   "index.html": "/react-yellow-website/index.html",
-  "precache-manifest.a8f97ae5f12a345826ed4782b39e0df3.js": "/react-yellow-website/precache-manifest.a8f97ae5f12a345826ed4782b39e0df3.js",
+  "precache-manifest.9a5b4948eef4e3afd24fc2fc6e0687ed.js": "/react-yellow-website/precache-manifest.9a5b4948eef4e3afd24fc2fc6e0687ed.js",
   "service-worker.js": "/react-yellow-website/service-worker.js",
   "static/css/main.a0ecb492.chunk.css.map": "/react-yellow-website/static/css/main.a0ecb492.chunk.css.map"
 }
