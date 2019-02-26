@@ -56,7 +56,7 @@ const Page = styled.div`
         -ms-letter-spacing: 5px;
         letter-spacing: -7px;
         line-height: 0.2em;
-        color: #036731;
+        color: #2b2b2b;
         font-family: sans-serif;
         font-weight: 500;  
           opacity: 0;
