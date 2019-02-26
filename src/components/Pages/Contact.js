@@ -1,44 +1,20 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+
 import ReCAPTCHA from 'react-google-recaptcha';
-import styled, {keyframes} from 'styled-components';
+import styled from 'styled-components';
+import ScrollAnimation  from 'react-animate-on-scroll';
 
-
-const animatezoom = keyframes`
-  from {transform: scale(0)}
-  to {transform: scale(1)}
-`;
 
 const Form = styled.div`
-  > button.openform{
-    width: 250px;
-    padding: 10px 20px;
-    background: #eca92d;
-    margin: 20px;
-  }
-
-  > div.popupform {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 60px;
-  }
-
+   width: 95%;
+   height: 100vh;
+  
   > div > form {
+      font-family: sans-serif;
       background-color: #fefefe;
-      margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-      border: 1px solid #888;
+      margin: 0% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
       max-width: 400px;
       width: 80%; /* Could be more or less, depending on screen size */
-      -webkit-animation: ${animatezoom} 0.6s;
-      animation: ${animatezoom} 0.6s;
       padding: 50px 30px;
   }
 
@@ -66,21 +42,27 @@ const Form = styled.div`
     display: block;
     padding: 3px 5px;
     font-size: 1.2rem;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     width: 100%;
-    border: 1px solid #ccc;
+    border: 0px;
+    border-bottom: 1px solid #ccc;
   }
   > div > form > div > input::placeholder, textarea::placeholder{
     font-size: 0.9rem;
-    color: #555;
+    color: #999;
   }
 
   > div > form > div > input.submit{
     width: 103%;
     margin-top: 15px;
     padding: 5px 0px;
-    background-color: #eca92d;
+    background-color: #9E9E9E;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 100;
+    letter-spacing: 2px;
   }
+  
 
   > div > form > div > p >button.cancel{
     padding: 10px 15px;
@@ -116,7 +98,7 @@ const initialStates = {
   expired: "false"
 }
 
-class FormContact extends React.Component{
+class Contact extends React.Component{
   constructor(props, ...args){
     super(props, ...args);
 
@@ -130,14 +112,12 @@ class FormContact extends React.Component{
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
-
-
   componentDidMount() {
     /* captcha call delay time */
     setTimeout(() => {
       this.setState({ load: true });
     }, DELAY);
-    console.log("didMount - reCaptcha Ref-", this._reCaptchaRef);
+   // console.log("didMount - reCaptcha Ref-", this._reCaptchaRef);
   }
 
   /** FOR CAPTCH  */
@@ -194,42 +174,38 @@ class FormContact extends React.Component{
   }
 
 
-  handleOnSubmit(event){
+  handleOnSubmit(event, props){
     event.preventDefault();
     const isValid = this.validate();
     if(isValid){
       this.setState(initialStates);
       console.log('name', this.state.name, 'email', this.state.email);
+
       alert('Okay');
+
+      
+
+
+
     }else{
       this.setState({msgError: 'Please enter required field'});
     }
 
   }
 
-
-  popupContactForm(){
-    document.getElementById('popupform').style.display='block';
-  }
-  closeContactForm(){
-    document.getElementById('popupform').style.display='none';
-  }
-
-
-
   render(){
     const { value, callback, load, expired } = this.state || {};
     return(
-      <Form>
-      <button className='openform' onClick={this.popupContactForm}>Message Me</button>
-
-      <div id="popupform" className="popupform">
-
+    <div>  
+    <ScrollAnimation animateIn="fadeIn" animateOnce={false}>
+    <Form>
+{/** POPUP FORM ****************************************************/}
+      <div>
+        <h3>Contact</h3>
         <form onSubmit={this.handleOnSubmit}>
-          <div><span onClick={this.closeContactForm} className="close" title="Close Login Form">&times;</span></div>
           <Msg>{this.state.msgError}</Msg>
           <div>
-            <label>Name</label>
+           
              <Msg>{this.state.nameError}</Msg>
               <input
                 type='text'
@@ -239,7 +215,7 @@ class FormContact extends React.Component{
                 placeholder='Name' />
           </div>
           <div>
-            <label>Email</label>
+           
              <Msg>{this.state.emailError}</Msg>
               <input
                 type='text'
@@ -249,9 +225,9 @@ class FormContact extends React.Component{
                 placeholder='Email' />
           </div>
           <div>
-            <label>Message</label>
+          
             <Msg>{this.state.messageError}</Msg>
-            <textarea style={{height:'200px'}}
+            <textarea style={{height:'100px'}}
               type='textarea'
               name='message'
               value={this.state.message}
@@ -262,7 +238,7 @@ class FormContact extends React.Component{
           {load && (
           <ReCAPTCHA
             style={{ display: "inline-block" }}
-            theme="dark"
+            theme="clean"
             ref={this._reCaptchaRef}
             sitekey={SITE_KEY}
             onChange={this.handleChange}
@@ -276,8 +252,11 @@ class FormContact extends React.Component{
           </div>
         </form>
       </div>
+      
       </Form>
+      </ScrollAnimation>
+      </div> 
     )
   }
 }
-export default FormContact;
+export default Contact;
