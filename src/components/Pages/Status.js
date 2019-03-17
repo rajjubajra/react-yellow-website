@@ -24,20 +24,31 @@ const MessageForm = styled.div`
 `;
 
 const Status = (props) => {
-  const title = props.data && props.data.title;
-  const text  = props.data && props.data.body;
+
+
+  const { contents, paiUrl } = props;
+  const status = contents.map((item)=> {
+          if(item.field_yellow_website_unique_bloc === 'status' )
+          {
+            return(
+              <Text>
+                  <ScrollAnimation animateIn="fadeIn" animateOnce={true}>
+                      <h3>{item.title}</h3>
+                      {ReactHtmlParser(item.field_yellow_website_content)}
+                      <MessageForm>
+                        <a href="https://www.yellow-website.com/d8-api-provider/contact/yw_contact_form" target="_blank" >Message me</a>
+                      </MessageForm>
+                  </ScrollAnimation>                  
+              </Text>       
+            )
+          }
+    })
+    
+
   return(
    <Page>
      <section>
-            <Text>
-              <ScrollAnimation animateIn="fadeIn" animateOnce={false}>
-                <h3>{ReactHtmlParser(title)}</h3>
-                {ReactHtmlParser(text)}
-                <MessageForm>
-                  <a href="https://www.yellow-website.com/d8-api-provider/contact/yw_contact_form" target="_blank" >Message me</a>
-                </MessageForm>
-              </ScrollAnimation>                
-            </Text>
+            {status}
       </section>
     </Page>  
   )

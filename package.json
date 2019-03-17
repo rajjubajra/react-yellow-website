@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://rajjubajra.github.io/react-yellow-website",
   "dependencies": {
+    "axios": "^0.18.0",
+    "events": "^3.0.0",
     "gh-pages": "^2.0.1",
     "react": "^16.7.0",
     "react-animate-on-scroll": "^2.1.5",

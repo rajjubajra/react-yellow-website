@@ -44,29 +44,38 @@ const Parallax = styled.div`
 
 class Introduction extends React.Component{
   
+  
 
   render(props){
-    const bgImagePath = this.props.bgImages[1] && this.props.bgImages[1].field_background_image;
-    const apiUrl = this.props.apiUrl && this.props.apiUrl;
-    const introduction = this.props.data[4] && this.props.data[4].body;
+
+    const { contents, apiUrl } = this.props;
+    const introduction = contents.map((item)=> {
+          if(item.field_yellow_website_unique_bloc === 'introduction' )
+          {
+            return(
+                  <Page key={item.nid} className='parallax-bg'>
+                    <section>
+                          <Text>
+                            <ScrollAnimation animateIn="fadeIn" animateOnce={true}>
+                              {ReactHtmlParser(item.field_yellow_website_content)}
+                            </ScrollAnimation>                  
+                          </Text> 
+                      </section>           
+                </Page>
+            )
+          }
+    })
+    
+    
     return(
-          <Parallax style={{backgroundImage:`url(${apiUrl}/${bgImagePath})`}}  >
-            <Page className='parallax-bg'>
-               <section>
-                    <Text>
-                      <ScrollAnimation animateIn="fadeIn" animateOnce={true}>
-                        {ReactHtmlParser(introduction)}
-                      </ScrollAnimation>                  
-                    </Text> 
-                </section>           
-           </Page>
+          <Parallax style={{backgroundImage:`url(${apiUrl}})`}}  >
+             {introduction}
            <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" offset="100" >
              <div className='what-can-i-do'>
              <h2>What Can I do</h2>
              <i className="fas fa-angle-down"></i>
             </div>
-           </ScrollAnimation>
-           
+           </ScrollAnimation>           
           </Parallax>
         )
   }

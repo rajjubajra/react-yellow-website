@@ -16,25 +16,33 @@ const Parallax = styled.div`
 
 
 const Develope = (props) => {
-    const bgImages = props.bgImages && props.bgImages.field_background_image;
-    const apiUrl = props.apiUrl && props.apiUrl;
-    const title = props.data && props.data.title;
-    const text = props.data && props.data.body;
-    //const image = props.data && props.apiUrl + '/' + props.data.field_image;
+
+  const { contents, apiUrl } = props;
+    const develope = contents.map((item)=> {
+          if(item.field_yellow_website_unique_bloc === 'develope' )
+          {
+            return(     
+              <Text key={item.nid}>
+                  <ScrollAnimation animateIn="fadeIn" animateOnce={false}>
+                  <h3>{ReactHtmlParser(item.title)}</h3>    
+                    {ReactHtmlParser(item.field_yellow_website_content)}
+                  </ScrollAnimation>                  
+              </Text>    
+            )
+          }
+    })
+    
+  
+  
   return(
-    <Parallax style={{backgroundImage:`url(${apiUrl}/${bgImages})`}}>
+    <Parallax style={{backgroundImage:`url(${apiUrl})`}}>
             <Page>
             <section>
                     <div className="left">
                     
                     </div>
                     <div className="right">
-                        <Text>
-                            <ScrollAnimation animateIn="fadeIn" animateOnce={false}>
-                                <h3>{ReactHtmlParser(title)}</h3>
-                                {ReactHtmlParser(text)}
-                            </ScrollAnimation>
-                        </Text>
+                        {develope}
                     </div>
             </section>
             </Page> 

@@ -3,8 +3,6 @@ import ReactHtmlParser from 'react-html-parser';
 import styled, {keyframes} from 'styled-components';
 
 
-
-
 const MoveRight = keyframes`
       from {left: -200px;}
       to {left: 0px;}
@@ -144,20 +142,29 @@ const Page = styled.div`
 
 
 const Landing = (props) => {
- 
-    console.log('LANDING PAGE PROPS : ', props.data);
-    const text = props.data && props.data.body;
-    const image = props.data && props.apiUrl + '/' + props.data.field_image;
+    console.log(props.contents);
+    const { contents, apiUrl } = props;
+    const landing = contents.map((item)=> {
+         return item.field_yellow_website_unique_bloc === 'landingpage' 
+          &&
+            
+              <Page>
+                  <div className='logo'>
+                    <img src={apiUrl + item.field_yellow_website_image_for_t} />
+                  </div>
+                  <div>
+                    {ReactHtmlParser(item.field_yellow_website_content)}
+                  </div>
+              </Page>
+            
+          
+    })
+
+    console.log('landing',landing);
     
     return(
       <div>     
-          <Page>
-                  <div className='logo'><img src={image} /></div>
-                  <div>
-                    {ReactHtmlParser(text)}
-                  </div>
-             
-          </Page>
+          {landing}
       </div>
     )
  

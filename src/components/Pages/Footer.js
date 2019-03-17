@@ -24,38 +24,34 @@ const StickToButtom = styled.div`
 const api = 'd8mailchimp/apifooter?_format=json';
 
 class Footer extends React.Component{
-    state = {
-      data: [],
-      isLoaded: false
-    }
-
-    componentDidMount(props){
-
-      fetch(`${this.props.anyWhereHeroku}/${this.props.apiUrl}/d8mailchimp/apifooter?_format=json`)
-      .then(response => response.json())
-      .then(data => this.setState({
-              isLoaded: true,
-              data: data
-      }))
-    }
+   
+ 
 
 
-    render(){
-      console.log('FOOTER DATA', this.state.data);
-      const url = this.state.data[0] && this.state.data[0].field_website_url;
-      const website = this.state.data[0] && this.state.data[0].field_website_url.substring(8);
-      const telephone = this.state.data[0] && this.state.data[0].field_telephone;
-      const address = this.state.data[0] && this.state.data[0].field_address;
-
-
+    render(props){
+      
+      const { footer, apiUrl } = this.props;
       let dt = new Date();
+
+      const contents = footer.map((item)=> {
+            return(
+                  <StickToButtom>
+                      <p>
+                        &copy; {dt.getFullYear()} All rights reserved  
+                        |   <a href={item.field_yw_footer_website_url}>    
+                              {item.field_yw_footer_website_url.substring(7)}
+                            </a>   
+                        |  {item.field_yw_footer_telephone} 
+                        |  {item.field_yw_footer_address}
+                      </p>
+                   </StickToButtom>
+                )
+          })
+
+     
       return(
         <div>
-        <StickToButtom>
-        <p>
-          &copy; {dt.getFullYear()} All rights reserved  |  <a href={url}>{website}</a> |  {telephone} | {address}
-        </p>
-        </StickToButtom>
+         {contents}
         </div>
        
       )

@@ -5,20 +5,29 @@ import ScrollAnimation from 'react-animate-on-scroll';
 
 
 const Design = (props) => {
-    const designTitle = props.data[3] && props.data[3].title;
-    const designText = props.data[3] && props.data[3].body;
-    const image = props.data[3] && props.apiUrl +'/'+props.data[3].field_image;
+
+    const { contents, paiUrl } = props;
+    const design = contents.map((item)=> {
+          if(item.field_yellow_website_unique_bloc === 'design' )
+          {
+            return(
+                    <Text key={item.nid}>
+                        <ScrollAnimation animateIn="fadeIn" animateOnce={false}>
+                        <h3>{ReactHtmlParser(item.title)}</h3>     
+                        {ReactHtmlParser(item.field_yellow_website_content)}
+                        </ScrollAnimation>                  
+                    </Text> 
+            )
+          }
+    })
+    
+   // const image = props.data[3] && props.apiUrl +'/'+props.data[3].field_image;
  
  return(
    <Page> 
    <section>
            <div className="left">
-               <Text>
-                    <ScrollAnimation animateIn="fadeIn" animateOnce={false}>
-                        <h3>{ReactHtmlParser(designTitle)}</h3> 
-                        {ReactHtmlParser(designText)}
-                    </ScrollAnimation>  
-               </Text>       
+               {design} 
            </div>
            <div className="right">
               
