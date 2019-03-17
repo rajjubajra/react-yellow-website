@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import ajax from './Restapi/ajax.js'
 import events from 'events';
 import styled from 'styled-components';
-import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
-
 /** CSS STYLE********************** */
 import './components/Css/Font.css';
 /** PAGE COMPONENTS**************** */
@@ -18,6 +16,12 @@ import Status from './components/Pages/Status';
 
 /** FOOTER ************************* */
 import Footer from './components/Pages/Footer';
+
+
+const Element = styled.div`
+
+`;
+
 
 const Page = styled.div`
     height: 100vh;

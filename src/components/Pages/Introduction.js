@@ -40,9 +40,36 @@ const Parallax = styled.div`
           color: #333;
         }
       }
+
+      .fas{
+        cursor: pointer;
+      }
 `;
 
 class Introduction extends React.Component{
+  state = {
+    introPosition: 0,
+  }
+
+
+  componentDidMount(){
+    //intro scroll position 
+    //scroll up 1.8 time of the total height of the windows from id "intro"
+    const element = document.getElementById('intro');
+    const introPosition = element.getBoundingClientRect();
+    this.setState({introPosition: -introPosition.height * 1.8 });
+    console.log(introPosition);
+  }
+
+  smoothScroll = () => {
+    
+        window.scrollTo({
+        'behavior': 'smooth',
+        'left': 0,
+        'top': - this.state.introPosition,
+      });
+  }
+
   
   
 
@@ -65,18 +92,17 @@ class Introduction extends React.Component{
             )
           }
     })
-    
-    
+        
     return(
-          <Parallax style={{backgroundImage:`url(${apiUrl}})`}}  >
-             {introduction}
-           <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" offset="100" >
-             <div className='what-can-i-do'>
-             <h2>What Can I do</h2>
-             <i className="fas fa-angle-down"></i>
-            </div>
-           </ScrollAnimation>           
-          </Parallax>
+              <Parallax id="intro" style={{backgroundImage:`url(${apiUrl}})`}}  >
+                {introduction}
+              <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" offset="100" >
+                <div className='what-can-i-do'>
+                <h2>What Can I do</h2>
+                <i onClick={this.smoothScroll} className="fas fa-angle-down"></i>
+                </div>
+              </ScrollAnimation>           
+              </Parallax>
         )
   }
 }

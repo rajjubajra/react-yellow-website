@@ -13,10 +13,12 @@ const StickToButtom = styled.div`
     > p{
       font-size: 0.9rem;
       letter-spacing: 0px;
+      text-align: center;
     }
 
-    > p > a{
+    > p > a, p{
       text-decoration: none;
+      color: #555;
     }
 
 `;
@@ -38,11 +40,11 @@ class Footer extends React.Component{
                   <StickToButtom>
                       <p>
                         &copy; {dt.getFullYear()} All rights reserved  
-                        |   <a href={item.field_yw_footer_website_url}>    
-                              {item.field_yw_footer_website_url.substring(7)}
-                            </a>   
-                        |  {item.field_yw_footer_telephone} 
-                        |  {item.field_yw_footer_address}
+                        &nbsp; <a href={item.field_yw_footer_website_url}>    
+                                 {item.field_yw_footer_website_url.substring(7)}
+                               </a> &nbsp;    
+                         | &nbsp; {item.field_yw_footer_telephone}  &nbsp;
+                         | &nbsp; {item.field_yw_footer_address}
                       </p>
                    </StickToButtom>
                 )

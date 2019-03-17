@@ -5,14 +5,14 @@ h3{
     font-weight: 300;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #a90504;
+    color: #333;
 }
 
 h4{
   font-family: sans-serif;
   font-weight: 100;
   letter-spacing: 2px;
-  color: #000;
+  color: #333;
   font-size: 1.5rem;
 }
 
