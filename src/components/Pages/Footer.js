@@ -23,13 +23,9 @@ const StickToButtom = styled.div`
 
 `;
 
-const api = 'd8mailchimp/apifooter?_format=json';
 
 class Footer extends React.Component{
-   
- 
-
-
+  
     render(props){
       
       const { footer, apiUrl } = this.props;
@@ -52,10 +48,9 @@ class Footer extends React.Component{
 
      
       return(
-        <div>
-         {contents}
+        <div className="col-md-12">
+          {contents}
         </div>
-       
       )
     }
 

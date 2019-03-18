@@ -4,26 +4,7 @@ import { Page, Text} from './Page-style';
 import ReactHtmlParser from 'react-html-parser';
 import ScrollAnimation from 'react-animate-on-scroll';
 
-const Parallax = styled.div`
-         
-      /* background-image: url("/images/intro.jpg");*/
-      /*  filter: grayscale(100%); */
-       
-      
-       /* Set a specific height */
-        min-height: 800px; 
-          
-        /* Create the parallax scrolling effect */
-        background-attachment: fixed;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      
-      p, h3{
-        color: #333;
-      }
-
-      .what-can-i-do{
+const ScrollNav = styled.div`
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -35,11 +16,11 @@ const Parallax = styled.div`
         justify-content: center;
         align-items: center;
         position: relative;
-        top: -100px;
+        top: -80px;
         h2{
           color: #333;
         }
-      }
+      
 
       .fas{
         cursor: pointer;
@@ -81,57 +62,31 @@ class Introduction extends React.Component{
           {
             return(
                   <Page key={item.nid} className='parallax-bg'>
-                    <section>
                           <Text>
                             <ScrollAnimation animateIn="fadeIn" animateOnce={true}>
                               {ReactHtmlParser(item.field_yellow_website_content)}
                             </ScrollAnimation>                  
                           </Text> 
-                      </section>           
-                </Page>
+                  </Page>
             )
           }
     })
         
     return(
-              <Parallax id="intro" style={{backgroundImage:`url(${apiUrl}})`}}  >
-                {introduction}
-              <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" offset="100" >
-                <div className='what-can-i-do'>
-                <h2>What Can I do</h2>
-                <i onClick={this.smoothScroll} className="fas fa-angle-down"></i>
-                </div>
-              </ScrollAnimation>           
-              </Parallax>
+      <div className="col-md-12">
+            <div id="intro">
+              {introduction}
+              <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" offset="200" >
+                <ScrollNav>
+                  <h3>What Can I do</h3>
+                  <i onClick={this.smoothScroll} className="fas fa-angle-down"></i>
+                </ScrollNav>
+              </ScrollAnimation>  
+            </div>         
+      </div>      
         )
   }
 }
 
-// const Introduction = (props) => {
-//   /** get data if not empty */
-//   console.log('bg image', props.bgImages[0] && props.bgImages[0].field_background_image);
-//   const introduction =  props.data[4] && props.data[4].body; 
-  
-//   return(
-//     <Parallax >
-//       <Page className='parallax-bg'>
-//          <section>
-//               <Text>
-//                 <ScrollAnimation animateIn="fadeIn" animateOnce={true}>
-//                   {ReactHtmlParser(introduction)}
-//                 </ScrollAnimation>                  
-//               </Text> 
-//           </section>           
-//      </Page>
-//      <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" offset="100" >
-//        <div className='what-can-i-do'>
-//        <h2>What Can I do</h2>
-//        <i className="fas fa-angle-down"></i>
-//       </div>
-//      </ScrollAnimation>
-     
-//     </Parallax>
-    
-//   )
-// }
+
 export default Introduction;

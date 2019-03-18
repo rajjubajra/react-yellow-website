@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import ajax from './Restapi/ajax.js'
 import events from 'events';
-import styled from 'styled-components';
-/** CSS STYLE********************** */
-import './components/Css/Font.css';
-/** PAGE COMPONENTS**************** */
-import MainButton from './components/button/MainButton';
+
+//import MainButton from './components/button/MainButton';
 import Loading from './components/Pages/Loading';
 import Landing from './components/Pages/Landing';
 import Introduction from './components/Pages/Introduction';
@@ -17,23 +14,6 @@ import Status from './components/Pages/Status';
 /** FOOTER ************************* */
 import Footer from './components/Pages/Footer';
 
-
-const Element = styled.div`
-
-`;
-
-
-const Page = styled.div`
-    height: 100vh;
-    .page-block{
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: -1;
-    }
-   }
-`;
 
 // Create an emitter object so that we can do pub/sub
 const emitter = new events.EventEmitter();
@@ -115,32 +95,37 @@ class App extends Component {
      const loading = !this.state.isLoaded && <Loading />;
    
     return (  
-      <div className="App">   
+      <div className="App">  
+           
          {loading}
-        <Page>
-            <MainButton />   
-            <div className="page-block">
-                <Element name='landing'>
-                  <Landing        contents={this.state.contents} apiUrl={apiUrl} />
-                </Element>
-                <Element name='intro'>
-                  <Introduction   contents={this.state.contents}    apiUrl={apiUrl} bgImages={this.state.bgImages} /> 
-                </Element>
-                <Element name='design'>
-                  <Design         contents={this.state.contents}    apiUrl={apiUrl} />
-                </Element>
-               <Element name='develope'>
-                  <Develope       contents={this.state.contents} apiUrl={apiUrl} />
-                </Element> 
-               <Element name='status'>
-                   <Status         contents={this.state.contents} apiUrl={apiUrl} /> 
-                </Element> 
-
-                 <Footer   footer={this.state.footer} apiUrl={apiUrl} />  
-            </div>
-        
-        </Page>
-      </div>
+        <div className="container">
+          <div className="row">
+            {/* <MainButton />  */}
+          </div>
+                
+          <div className="row">
+              <Landing        contents={this.state.contents} apiUrl={apiUrl} />
+          </div>
+          <div className="row">
+             <Introduction   
+             contents={this.state.contents}    
+             apiUrl={apiUrl} 
+             bgImages={this.state.bgImages} /> 
+          </div>
+          <div className="row">
+             <Design         contents={this.state.contents}    apiUrl={apiUrl} />
+          </div>
+          <div className="row">
+            <Develope       contents={this.state.contents} apiUrl={apiUrl} />
+          </div>
+          <div className="row">
+            <Status         contents={this.state.contents} apiUrl={apiUrl} /> 
+          </div>      
+          <div className="row">
+             <Footer   footer={this.state.footer} apiUrl={apiUrl} />  
+          </div>
+        </div>
+      </div>  //**  class App */
     );
   }
 }

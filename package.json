@@ -5,6 +5,7 @@
   "homepage": "https://rajjubajra.github.io/react-yellow-website",
   "dependencies": {
     "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
     "events": "^3.0.0",
     "gh-pages": "^2.0.1",
     "react": "^16.7.0",

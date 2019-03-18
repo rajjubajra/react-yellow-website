@@ -78,7 +78,7 @@ const Page = styled.div`
             -ms-letter-spacing: 0.37rem;
             letter-spacing: 0.555rem;
             position: relative;
-            top: 5px;
+            top: 55px;
             color: black;
             opacity: 0;
             position: relative;
@@ -93,49 +93,31 @@ const Page = styled.div`
             animation-fill-mode: forwards;
     }
 
-
-    /* Extra small devices (phones, 600px and down) */
-    @media only screen and (max-width: 600px) {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-
-          > div.logo {
-            text-align: center;
-            border-right: 0px solid #ccc;
-            position: relative; 
-            top: 0;
-            margin-right: 0px;
-           
+    // Medium devices (tablets, 768px and up)
+    @media (max-width: 768px) {
+        flex-direction: column;
+        > div.logo {
+          border-right: 0px solid #ccc;
+          width: 100px;
+          margin: 0px auto;
         }
 
         > div > h2{
-              line-height: 0.8em;
-              text-align:center;
-
+          font-size: 3rem;
+          letter-spacing: -6px;
+          position: relative;
+          top: 35px;
+          text-align: center; 
         }
 
         > div > p{
-          font-size: 1em;
+          letter-spacing: 0.22rem;
           text-align: center;
+          top: 55px;
+          left: 5px;
         }
+     }
 
-
-    } 
-    /* Small devices (portrait tablets and large phones, 600px and up) */
-    @media only screen and (min-width: 600px) {
-        
-    } 
-
-
-    /* Medium devices (landscape tablets, 768px and up) */
-    @media only screen and (min-width: 768px) {...} 
-    /* Large devices (laptops/desktops, 992px and up) */
-    @media only screen and (min-width: 992px) {...} 
-
-
-    /* Extra large devices (large laptops and desktops, 1200px and up) */
-    @media only screen and (min-width: 1200px) {...}
 
 `;
 
@@ -146,8 +128,7 @@ const Landing = (props) => {
     const { contents, apiUrl } = props;
     const landing = contents.map((item)=> {
          return item.field_yellow_website_unique_bloc === 'landingpage' 
-          &&
-            
+          &&     
               <Page>
                   <div className='logo'>
                     <img src={apiUrl + item.field_yellow_website_image_for_t} />
@@ -156,17 +137,15 @@ const Landing = (props) => {
                     {ReactHtmlParser(item.field_yellow_website_content)}
                   </div>
               </Page>
-            
-          
     })
 
     console.log('landing',landing);
     
     return(
-      <div>     
-          {landing}
+      <div className="col-md-12">
+        {landing} 
       </div>
-    )
+       )
  
 }
 export default Landing;

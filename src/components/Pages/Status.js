@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import ScrollAnimation  from 'react-animate-on-scroll';
 
 
-const MessageForm = styled.div`
+const MessageButtom = styled.div`
       width: 100%;
       margin: 0px auto;
       text-align: center;
@@ -31,26 +31,26 @@ const Status = (props) => {
           if(item.field_yellow_website_unique_bloc === 'status' )
           {
             return(
-              <Text>
-                  <ScrollAnimation animateIn="fadeIn" animateOnce={true}>
-                      <h3>{item.title}</h3>
-                      {ReactHtmlParser(item.field_yellow_website_content)}
-                      <MessageForm>
-                        <a href="https://www.yellow-website.com/d8-api-provider/contact/yw_contact_form" target="_blank" >Message me</a>
-                      </MessageForm>
-                  </ScrollAnimation>                  
-              </Text>       
+              <Page>
+                 <Text>
+                    <ScrollAnimation animateIn="fadeIn" animateOnce={true}>
+                        <h3>{item.title}</h3>
+                        {ReactHtmlParser(item.field_yellow_website_content)}
+                        <MessageButtom>
+                          <a href="https://www.yellow-website.com/d8-api-provider/contact/yw_contact_form" target="_blank" >Message me</a>
+                        </MessageButtom>
+                    </ScrollAnimation>                  
+                 </Text>      
+              </Page>              
             )
           }
     })
     
 
   return(
-   <Page>
-     <section>
-            {status}
-      </section>
-    </Page>  
+    <div className="col-md-12">
+       {status}
+    </div>
   )
 }
 export default Status;
