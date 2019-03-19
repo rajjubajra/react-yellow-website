@@ -124,12 +124,11 @@ const Page = styled.div`
 
 
 const Landing = (props) => {
-    console.log(props.contents);
     const { contents, apiUrl } = props;
     const landing = contents.map((item)=> {
          return item.field_yellow_website_unique_bloc === 'landingpage' 
           &&     
-              <Page>
+              <Page key={item.nid}>
                   <div className='logo'>
                     <img src={apiUrl + item.field_yellow_website_image_for_t} />
                   </div>
@@ -139,7 +138,6 @@ const Landing = (props) => {
               </Page>
     })
 
-    console.log('landing',landing);
     
     return(
       <div className="col-md-12">

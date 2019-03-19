@@ -33,7 +33,7 @@ class Footer extends React.Component{
 
       const contents = footer.map((item)=> {
             return(
-                  <StickToButtom>
+                  <StickToButtom key={item.nid}>
                       <p>
                         &copy; {dt.getFullYear()} All rights reserved  
                         &nbsp; <a href={item.field_yw_footer_website_url}>    

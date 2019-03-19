@@ -29,7 +29,8 @@ class App extends Component {
       contents: [],
       footer: [],
       isLoaded: false,
-      images: []
+      images: [],
+      yPosition: 0,
     }
   }
 
@@ -43,6 +44,8 @@ class App extends Component {
 
   async componentDidMount() {
     await this.refresh()
+    //get scroll position
+    this.getScrollPosition()
   }
 
   async refresh() {
@@ -57,7 +60,7 @@ class App extends Component {
             this.setState({ 
                             contents: contents.data,                 
                           })
-          }
+              }
 
            //get Footer Data 
            const footer = await axios.get('/rest/yellow-website-footer') // wait for the POST AJAX request to complete
@@ -65,22 +68,26 @@ class App extends Component {
             // setState will trigger repaint
             this.setState({ 
                             footer: footer.data,   
-                            isLoaded: true                 
+                            isLoaded: true              
                           })
-          }
+                }
 
        
 
-      
-
-
+  
 
       } catch (e) {
       alert(e)
     }
   }
 
+  getScrollPosition = () => {      
 
+      window.onscroll = () => {
+        this.setState({yPosition: window.pageYOffset})
+      }
+
+  }
 
   
   routeChangeTo = (route) => {
@@ -93,12 +100,16 @@ class App extends Component {
   render() {
      
      const loading = !this.state.isLoaded && <Loading />;
-   
+     console.log(this.state.yPosition);
+
     return (  
       <div className="App">  
            
-         {loading}
+         
         <div className="container">
+           <div className="row">
+             {loading}
+           </div>
           <div className="row">
             {/* <MainButton />  */}
           </div>
@@ -110,16 +121,29 @@ class App extends Component {
              <Introduction   
              contents={this.state.contents}    
              apiUrl={apiUrl} 
-             bgImages={this.state.bgImages} /> 
+             bgImages={this.state.bgImages} 
+             yPosition={this.state.yPosition}
+             /> 
           </div>
           <div className="row">
-             <Design         contents={this.state.contents}    apiUrl={apiUrl} />
+             <Design  
+                contents={this.state.contents}    
+                apiUrl={apiUrl} 
+                yPosition={this.state.yPosition}
+                />
           </div>
           <div className="row">
-            <Develope       contents={this.state.contents} apiUrl={apiUrl} />
+            <Develope       
+                 contents={this.state.contents} 
+                 apiUrl={apiUrl}
+                 yPosition={this.state.yPosition}
+            />
           </div>
           <div className="row">
-            <Status         contents={this.state.contents} apiUrl={apiUrl} /> 
+            <Status         
+                contents={this.state.contents} 
+                apiUrl={apiUrl} 
+            /> 
           </div>      
           <div className="row">
              <Footer   footer={this.state.footer} apiUrl={apiUrl} />  

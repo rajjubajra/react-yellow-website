@@ -31,7 +31,7 @@ const Status = (props) => {
           if(item.field_yellow_website_unique_bloc === 'status' )
           {
             return(
-              <Page>
+              <Page key={item.nid}>
                  <Text>
                     <ScrollAnimation animateIn="fadeIn" animateOnce={true}>
                         <h3>{item.title}</h3>

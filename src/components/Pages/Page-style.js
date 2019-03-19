@@ -2,6 +2,14 @@ import styled from 'styled-components';
 
 export const Page = styled.div`
 
+.show{
+  display: flex;
+  flex-direction: column;
+}
+.hide{
+  display: none;
+}
+
 color: #666;
 font-family: sans-serif;
 width: 100%;

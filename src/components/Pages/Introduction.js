@@ -2,48 +2,53 @@ import React from 'react';
 import styled from 'styled-components';
 import { Page, Text} from './Page-style';
 import ReactHtmlParser from 'react-html-parser';
-import ScrollAnimation from 'react-animate-on-scroll';
+import BtnAngleDown from './BtnAngleDown';
+import { NONAME } from 'dns';
 
-const ScrollNav = styled.div`
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        flex-direction: column;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        top: -80px;
-        h2{
-          color: #333;
-        }
-      
+const Intro = styled.div`
+  position: relative;
+  top: -170px;
 
-      .fas{
-        cursor: pointer;
-      }
+  h3{
+    width: 100%;
+  }
+
+  .show{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+  .hide{
+    display: none;
+  }
+
+       
 `;
 
 class Introduction extends React.Component{
   state = {
     introPosition: 0,
+    show: true,
   }
 
 
   componentDidMount(){
     //intro scroll position 
-    //scroll up 1.8 time of the total height of the windows from id "intro"
+    //at id "intro" position from top + 500  < pageYOffset "hide" intro div
+    // show and hide variable is defined at the render
     const element = document.getElementById('intro');
     const introPosition = element.getBoundingClientRect();
-    this.setState({introPosition: -introPosition.height * 1.8 });
-    console.log(introPosition);
+    this.setState({introPosition: introPosition.top + 500});
   }
 
+
+
+  
+
+
+
+
   smoothScroll = () => {
-    
         window.scrollTo({
         'behavior': 'smooth',
         'left': 0,
@@ -56,6 +61,7 @@ class Introduction extends React.Component{
 
   render(props){
 
+    console.log('position', this.state.introPosition, this.props.yPosition);
     const { contents, apiUrl } = this.props;
     const introduction = contents.map((item)=> {
           if(item.field_yellow_website_unique_bloc === 'introduction' )
@@ -63,26 +69,32 @@ class Introduction extends React.Component{
             return(
                   <Page key={item.nid} className='parallax-bg'>
                           <Text>
-                            <ScrollAnimation animateIn="fadeIn" animateOnce={true}>
+                           
                               {ReactHtmlParser(item.field_yellow_website_content)}
-                            </ScrollAnimation>                  
+                                           
                           </Text> 
                   </Page>
             )
           }
     })
+
+
+    //if id "intro" top position + 500px  > pageYOffset than hide id "intro"
+    const showHide = this.props.yPosition < this.state.introPosition
+    ? 'show' : 'hide';
+    
         
     return(
       <div className="col-md-12">
-            <div id="intro">
+      {this.props.yPosition + ' - ' + this.state.introPosition}
               {introduction}
-              <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" offset="200" >
-                <ScrollNav>
-                  <h3>What Can I do</h3>
-                  <i onClick={this.smoothScroll} className="fas fa-angle-down"></i>
-                </ScrollNav>
-              </ScrollAnimation>  
-            </div>         
+              
+            <Intro id="intro">  
+                <div className={showHide}>
+                   <h3>What Can I do</h3>
+                  <BtnAngleDown />
+                </div>                 
+            </Intro>         
       </div>      
         )
   }
