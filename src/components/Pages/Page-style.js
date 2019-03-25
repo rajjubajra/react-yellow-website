@@ -1,4 +1,11 @@
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+
+const FadeOut = keyframes`
+0%   {border: 1px solid #ccc; color: yellow;box-shadow: 0px 0px 0px #ccc;}
+70%  {border: 1px solid #eee; }
+100% {border: 1px solid #eee; color: #000; box-shadow: 1px 1px 6px #ccc;}
+`;
+
 
 export const Page = styled.div`
 
@@ -16,7 +23,6 @@ width: 100%;
 height: 100vh;
 display: flex;
 flex-direction: column;
-flex-wrap: wrap;
 
   > div{
     max-width: 460px;
@@ -24,6 +30,19 @@ flex-wrap: wrap;
     text-align: justify;
     margin-top: 60px;
     margin-bottom: 60px;
+    padding: 50px;
+    border: 1px solid #fff;
+    
+  }
+
+  >div:hover{
+    border: 1px solid #eee;
+    box-shadow: 1px 1px 6px #ccc;
+    animation-name: ${FadeOut} ;
+    animation-duration: 4s;
+    cursor: default;
+    color: #000;
+    
   }
 
   

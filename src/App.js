@@ -13,6 +13,7 @@ import Status from './components/Pages/Status';
 
 /** FOOTER ************************* */
 import Footer from './components/Pages/Footer';
+import PaperPlan from './components/Pages/PaperPlan/PaperPlane.js';
 
 
 // Create an emitter object so that we can do pub/sub
@@ -27,9 +28,12 @@ class App extends Component {
     this.state = {
       route: 'home',
       contents: [],
-      footer: [],
-      isLoaded: false,
       images: [],
+      footer: [],
+      bgIntro: '',
+      bgDesigner: '',
+      bgDeveloper: '',
+      isLoaded: false,
       yPosition: 0,
     }
   }
@@ -61,6 +65,20 @@ class App extends Component {
                             contents: contents.data,                 
                           })
               }
+
+
+            //get Yellow-wesite Images Data 
+          const images = await axios.get('/rest/yellow-website-images') // wait for the POST AJAX request to complete
+          if (images.data) {
+            // setState will trigger repaint
+            this.setState({ 
+                            images: images.data,                 
+                          })
+              }   
+
+
+
+
 
            //get Footer Data 
            const footer = await axios.get('/rest/yellow-website-footer') // wait for the POST AJAX request to complete
@@ -97,32 +115,34 @@ class App extends Component {
 
   
 
+
+
   render() {
      
-     const loading = !this.state.isLoaded && <Loading />;
-     console.log(this.state.yPosition);
+   
 
     return (  
       <div className="App">  
-           
+
+       { this.state.isLoaded   ?   
          
-        <div className="container">
+        <div className="container-fluid">
            <div className="row">
-             {loading}
+             
            </div>
           <div className="row">
             {/* <MainButton />  */}
           </div>
-                
           <div className="row">
               <Landing        contents={this.state.contents} apiUrl={apiUrl} />
           </div>
-          <div className="row">
+          <div className="row" >
              <Introduction   
              contents={this.state.contents}    
              apiUrl={apiUrl} 
              bgImages={this.state.bgImages} 
              yPosition={this.state.yPosition}
+             images={this.state.images}
              /> 
           </div>
           <div className="row">
@@ -149,9 +169,10 @@ class App extends Component {
              <Footer   footer={this.state.footer} apiUrl={apiUrl} />  
           </div>
         </div>
+        //else loading page
+        : <Loading /> }
       </div>  //**  class App */
     );
   }
 }
-
 export default App;

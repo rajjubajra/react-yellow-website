@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Page, Image, Text } from './Page-style';
-import ScrollAnimation from 'react-animate-on-scroll';
 import BtnAngleDown from './BtnAngleDown';
 
 
@@ -47,7 +46,7 @@ class Design extends React.Component{
           <Page>
             {design} 
             <div id="btn" className={showHide}>
-                <BtnAngleDown />
+               
             </div>
           </Page>
         </div>

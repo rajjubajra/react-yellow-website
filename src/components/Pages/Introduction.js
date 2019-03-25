@@ -3,7 +3,16 @@ import styled from 'styled-components';
 import { Page, Text} from './Page-style';
 import ReactHtmlParser from 'react-html-parser';
 import BtnAngleDown from './BtnAngleDown';
-import { NONAME } from 'dns';
+
+
+const Div = styled.div`
+
+// background: linear-gradient(to bottom right,#fff 0%,#fff 50%,#e9ecef 50%,#dad6d6 100%);
+
+
+`;
+
+
 
 const Intro = styled.div`
   position: relative;
@@ -32,7 +41,7 @@ class Introduction extends React.Component{
   }
 
 
-  componentDidMount(){
+  componentDidMount(props){
     //intro scroll position 
     //at id "intro" position from top + 500  < pageYOffset "hide" intro div
     // show and hide variable is defined at the render
@@ -40,12 +49,6 @@ class Introduction extends React.Component{
     const introPosition = element.getBoundingClientRect();
     this.setState({introPosition: introPosition.top + 500});
   }
-
-
-
-  
-
-
 
 
   smoothScroll = () => {
@@ -62,16 +65,14 @@ class Introduction extends React.Component{
   render(props){
 
     console.log('position', this.state.introPosition, this.props.yPosition);
-    const { contents, apiUrl } = this.props;
+    const { contents, bgIntro ,apiUrl } = this.props;
     const introduction = contents.map((item)=> {
           if(item.field_yellow_website_unique_bloc === 'introduction' )
           {
             return(
-                  <Page key={item.nid} className='parallax-bg'>
-                          <Text>
-                           
-                              {ReactHtmlParser(item.field_yellow_website_content)}
-                                           
+                  <Page key={item.nid} className='parallax-bg' style={{backgroundImage:`url(${bgIntro})`}}>
+                          <Text>                   
+                              {ReactHtmlParser(item.field_yellow_website_content)}  
                           </Text> 
                   </Page>
             )
@@ -85,7 +86,7 @@ class Introduction extends React.Component{
     
         
     return(
-      <div className="col-md-12">
+      <Div className="col-md-12">
       {this.props.yPosition + ' - ' + this.state.introPosition}
               {introduction}
               
@@ -95,7 +96,7 @@ class Introduction extends React.Component{
                   <BtnAngleDown />
                 </div>                 
             </Intro>         
-      </div>      
+      </Div>      
         )
   }
 }

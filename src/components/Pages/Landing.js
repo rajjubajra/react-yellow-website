@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import styled, {keyframes} from 'styled-components';
+import BackgroundAnimation from './BackgroundAnimation/BackgroundAnimation';
 
 
 const MoveRight = keyframes`
@@ -25,6 +26,9 @@ const Page = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 0px;
+    position: relative;
+    z-index: 5;
+
 
     > div.logo {
       border-right: 1px solid #ccc;
@@ -131,6 +135,7 @@ const Landing = (props) => {
               <Page key={item.nid}>
                   <div className='logo'>
                     <img src={apiUrl + item.field_yellow_website_image_for_t} />
+                    <i className="circle"></i>
                   </div>
                   <div>
                     {ReactHtmlParser(item.field_yellow_website_content)}
@@ -142,8 +147,8 @@ const Landing = (props) => {
     return(
       <div className="col-md-12">
         {landing} 
+        <BackgroundAnimation />
       </div>
        )
- 
 }
 export default Landing;
